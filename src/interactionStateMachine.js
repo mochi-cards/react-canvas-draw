@@ -13,7 +13,7 @@ const SUPPRESS_SCROLL = (e) => {
 export class DefaultState {
   handleMouseWheel = (e, canvasDraw) => {
     const { enablePanAndZoom, mouseZoomFactor } = canvasDraw.props;
-    if (canvasDraw.state.disabled) {
+    if (canvasDraw.disabled) {
       return new DisabledState();
     } else if (enablePanAndZoom && e.ctrlKey) {
       e.preventDefault();
@@ -23,7 +23,7 @@ export class DefaultState {
   };
 
   handleDrawStart = (e, canvasDraw) => {
-    if (canvasDraw.state.disabled) {
+    if (canvasDraw.disabled) {
       return new DisabledState();
     } else if (e.ctrlKey && canvasDraw.props.enablePanAndZoom) {
       return (new PanState()).handleDrawStart(e, canvasDraw);
@@ -33,7 +33,7 @@ export class DefaultState {
   };
 
   handleDrawMove = (e, canvasDraw) => {
-    if (canvasDraw.state.disabled) {
+    if (canvasDraw.disabled) {
       return new DisabledState();
     } else {
       const { x, y } = viewPointFromEvent(canvasDraw.coordSystem, e);
@@ -43,7 +43,7 @@ export class DefaultState {
   };
 
   handleDrawEnd = (e, canvasDraw) => {
-    return canvasDraw.state.disabled ? (new DisabledState()) : this;
+    return canvasDraw.disabled ? (new DisabledState()) : this;
   };
 };
 
@@ -55,7 +55,7 @@ export class DefaultState {
  */
 export class DisabledState {
   handleMouseWheel = (e, canvasDraw) => {
-    if (canvasDraw.state.disabled) {
+    if (canvasDraw.disabled) {
       return this;
     } else {
       return (new DefaultState()).handleMouseWheel(e, canvasDraw);
@@ -63,7 +63,7 @@ export class DisabledState {
   };
 
   handleDrawStart = (e, canvasDraw) => {
-    if (canvasDraw.state.disabled) {
+    if (canvasDraw.disabled) {
       return this;
     } else {
       return (new DefaultState()).handleDrawStart(e, canvasDraw);
@@ -71,7 +71,7 @@ export class DisabledState {
   };
 
   handleDrawMove = (e, canvasDraw) => {
-    if (canvasDraw.state.disabled) {
+    if (canvasDraw.disabled) {
       return this;
     } else {
       return (new DefaultState()).handleDrawMove(e, canvasDraw);
@@ -79,7 +79,7 @@ export class DisabledState {
   };
 
   handleDrawEnd = (e, canvasDraw) => {
-    if (canvasDraw.state.disabled) {
+    if (canvasDraw.disabled) {
       return this;
     } else {
       return (new DefaultState()).handleDrawEnd(e, canvasDraw);
