@@ -1,3 +1,4 @@
+This fork adds disabled as a state property.
 <div align="center">
 <h1>React Canvas Draw</h1>
 </div>

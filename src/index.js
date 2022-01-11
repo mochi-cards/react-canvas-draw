@@ -106,6 +106,8 @@ export default class CanvasDraw extends PureComponent {
     this.lines = [];
     this.erasedLines = [];
 
+    this.disabled = props.disabled;
+
     this.mouseHasMoved = true;
     this.valuesChanged = true;
     this.isDrawing = false;
